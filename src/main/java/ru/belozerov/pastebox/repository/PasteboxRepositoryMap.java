@@ -36,7 +36,7 @@ public class PasteboxRepositoryMap implements PasteboxRepository{
 
         return vault.values().stream()
                 .filter(PasteboxEntity::isPublic) // Only public
-                .filter(pasteboxEntity -> pasteboxEntity.getLifetime().isBefore(now)) //Only living
+                .filter(pasteboxEntity -> pasteboxEntity.getLifetime().isAfter(now)) //Only living
                 .sorted(Comparator.comparing(PasteboxEntity::getId).reversed()) // sorted by id
                 .limit(amount)
                 .collect(Collectors.toList());
